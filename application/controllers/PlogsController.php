@@ -139,7 +139,27 @@
 	
 		public function upload()
 		{
-			
+			if(!empty($_FILES['image']['name'])){
+                $config['upload_path'] = 'uploads/images/';
+                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $config['file_name'] = $_FILES['image']['name'];
+                
+                //Load upload library and initialize configuration
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config);
+				
+				if($this->upload->do_upload('picture')){
+                    $uploadData = $this->upload->data();
+                    $picture = $uploadData['file_name'];
+					 $insertUserData = $this->PostsModel->insert_image($Picture);
+                }else{
+                    $picture = '';
+                }
+            }else{
+                $picture = '';
+				echo "1";
+            }
+			$this->postView();
 		}
 	}
 ?>

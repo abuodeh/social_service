@@ -41,6 +41,14 @@
 			$this->db->delete('comments');			
 		}
 		
+		public function insert_image($picture)
+		{
+			$this->user_id = $this->session->id;
+			$this->check_image = 1;
+			$this->image = $picture;
+			
+			$insert = $this->db->insert('posts',$this);
+		}
 					
 	}
 ?>
