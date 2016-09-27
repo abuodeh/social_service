@@ -124,6 +124,12 @@
 			$this->db->delete('comments');			
 		}
 		
+		public function delete_comment($comment_id)
+		{
+			$this->db->where('id', $comment_id);
+			$this->db->delete('comments');			
+		}
+		
 		public function add_comment($post_id,$comment,$user_id)
 		{
 			$this->user_id = $user_id;

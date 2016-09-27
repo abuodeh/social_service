@@ -143,13 +143,35 @@
 			}
 		}
 	
-		public function delete()
+		public function delete_post()
 		{
 			if(isset($_SESSION['email'])){
 				$post_id = $this->uri->segment(3);
-				if($post_id == $this->session->id)
+				$user_id = $this->uri->segment(4);
+				if($user_id == $this->session->id)
 				{
 					$this->social_service_model->delete_post($post_id);
+					$this->post_view();
+				}
+				else
+				{
+					$this->post_view();
+				}
+			}
+			else
+			{
+				$this->post_view();
+			}
+		}
+		
+		public function delete_comment()
+		{
+			if(isset($_SESSION['email'])){
+				$comment_id = $this->uri->segment(3);
+				$user_id = $this->uri->segment(4);
+				if($user_id == $this->session->id)
+				{
+					$this->social_service_model->delete_comment($comment_id);
 					$this->post_view();
 				}
 				else

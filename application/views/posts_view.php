@@ -138,7 +138,7 @@
 				<?php
 				if($data_item['user_id'] ==  $this->session->id)
 				{
-						echo form_open('social_service/delete/'.$data_item['id']);
+						echo form_open('social_service/delete_post/'.$data_item['id'].'/'.$data_item['user_id']);
 					?>
 						<input id="delete" class="submit" value="Delete" type="submit" >
 						<br>
@@ -170,10 +170,24 @@
 						{
 							?>
 							<div class="comments">
-							<h5 class="text_comment  time"><?php echo $comment['time']?></h5>
-							<h3 class="text_comment"><?php echo $comment['name'] ?></h3>
-							<h4 class="text_comment">"<?php echo $comment['comment'] ?>"</h4>
+								<h5 class="text_comment  time"><?php echo $comment['time']?></h5>
+								<h3 class="text_comment"><?php echo $comment['name'] ?></h3>
+								<h4 class="text_comment">"<?php echo $comment['comment'] ?>"</h4>
+								<!--delete button -->
+								<?php
+								if($comment['user_id'] ==  $this->session->id)
+								{
+										echo form_open('social_service/delete_comment/'.$comment['id'].'/'.$comment['user_id']);
+									?>
+										<input id="delete" class="submit" value="Delete" type="submit" >
+										<br>
+										<br>
+									<?php
+										echo form_close();
+								}
+								?>
 							</div>
+							
 							<?php
 						}
 						else
