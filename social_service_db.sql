@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2016 at 11:49 AM
+-- Generation Time: Sep 27, 2016 at 04:52 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -34,15 +34,16 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `comment`, `user_id`, `post_id`, `time`) VALUES
-(3, '22', 1, 4, '2016-09-27 09:19:58'),
-(4, 'good morning', 1, 2, '2016-09-27 09:26:46');
+(4, 'good morning', 1, 2, '2016-09-27 09:26:46'),
+(5, '33', 3, 4, '2016-09-27 09:59:44'),
+(6, '22', 1, 4, '2016-09-27 10:06:59');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `information` (
   `password` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `information`
@@ -65,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `information` (
 INSERT INTO `information` (`id`, `email`, `password`, `name`) VALUES
 (1, 's@h.com', '123', 'soad'),
 (2, 's1@h.com', '1', 's'),
-(3, 'r@h.com', '1234', 's');
+(3, 'r@h.com', '1234', 's'),
+(4, 'a@b.com', '111', 'cd');
 
 -- --------------------------------------------------------
 
@@ -76,19 +78,24 @@ INSERT INTO `information` (`id`, `email`, `password`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post` varchar(100) NOT NULL,
+  `check_image` int(1) NOT NULL DEFAULT '0',
+  `image` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `post`, `user_id`, `time`) VALUES
-(2, 'good morning', 3, '2016-09-27 07:09:34'),
-(4, '11', 3, '2016-09-27 08:11:50'),
-(6, 'hello', 1, '2016-09-27 09:26:36');
+INSERT INTO `posts` (`id`, `post`, `check_image`, `image`, `user_id`, `time`) VALUES
+(2, 'good morning', 0, '', 3, '2016-09-27 07:09:34'),
+(4, '11', 0, '', 3, '2016-09-27 08:11:50'),
+(8, 'ff', 0, '', 1, '2016-09-27 12:02:01'),
+(9, '123', 0, '', 1, '2016-09-27 13:53:03'),
+(10, '111', 0, '', 2, '2016-09-27 13:56:28'),
+(11, '444', 0, '', 1, '2016-09-27 14:44:19');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
