@@ -1,39 +1,41 @@
 <?php 
 
-	class Social_service extends CI_Controller
+	class SocialService extends CI_Controller
 	{
 		function __construct()
         {
             parent::__construct();
 			$this->load->database();
-            $this->load->model('social_service_model');
+            $this->load->model('CommentsModel');
+            $this->load->model('UsersModel');
+            $this->load->model('PostsModel');
 			$this->load->library('session');
 			$this->load->helper('form');
-			$this->load->library('session');
 			$this->load->library('form_validation');
-
+			$this->load->library('upload');
+			$this->load->helper('url');
         }
 
 		public function index()
 		{
 			if(isset($_SESSION['email'])){
-				$this->post_view();
+				$this->postView();
 			}
 			else{
-				$this->load->view('login-view');
+				$this->load->view('users/login-view');
 			}
 
 		}
 		
-		public function post_view()
+		public function postView()
 		{
 			if(isset($_SESSION['email'])){
-				$this->data['posts'] = $this->social_service_model->get_posts();
-				$this->data['comments'] = $this->social_service_model->get_comments();
-				$this->load->view('posts_view',$this->data);
+				$this->data['posts'] = $this->PostsModel->getPosts();
+				$this->data['comments'] = $this->CommentsModel->getComments();
+				$this->load->view('blogs/posts_view',$this->data);
 			}
 			else{
-				$this->load->view('login-view');
+				$this->load->view('users/login-view');
 			}
 		}
 		
@@ -45,54 +47,54 @@
 			 {
 				$email=$_POST['email'];
 				$password=$_POST['password'];
-			    $this->check = $this->social_service_model->login($email,$password);
+			    $this->check = $this->UsersModel->login($email,$password);
 				if($this->check == "true")
 				{
 					$this->session->set_userdata('email', $email);
-					$this->info = $this->social_service_model->get_info($email);
+					$this->info = $this->UsersModel->getInfo($email);
 					$this->session->set_userdata('name', $this->info['name']);
 					$this->session->set_userdata('id', $this->info['id']);
-					$this->post_view();
+					$this->postView();
 				}
 				else{
 					if(isset($_SESSION['email'])){
-						$this->post_view();
+						$this->postView();
 					}
 					else{
 						$this->data['note'] = "Email or Password incorrect";
-						$this->load->view('login-view',$this->data);
+						$this->load->view('users/login-view',$this->data);
 					}
 				}
 			 }
 			 else
 			 {
 					if(isset($_SESSION['email'])){
-					$this->post_view();
+					$this->postView();
 					}
 					else{
-						$this->load->view('login-view');
+						$this->load->view('users/login-view');
 					}
 			 }
 			
 		}
 		
-		public function log_out()
+		public function logOut()
 		{
 			unset(
 					$_SESSION['email'],
 					$_SESSION['name'],
 					$_SESSION['id']
 			);
-			$this->load->view('login-view');
+			$this->load->view('users/login-view');
 		}
 		
-		public function register_view()
+		public function registerView()
 		{	
 			if(isset($_SESSION['email'])){
-				$this->post_view();
+				$this->postView();
 			}
 			else{
-				$this->load->view('register_view'); 
+				$this->load->view('users/register_view'); 
 			}
 			
 		}
@@ -103,11 +105,11 @@
 			if ($this->form_validation->run() == TRUE)
 			 {
 				 $post=$_POST['post'];
-				 $this->social_service_model->add_post($post);
-				 $this->post_view();
+				 $this->PostsModel->addPost($post);
+				 $this->postView();
 			 }
 			else{
-				$this->post_view();
+				$this->postView();
 			}
 		}
 		
@@ -122,66 +124,66 @@
 				$email=$_POST['email'];
 				$password=$_POST['password'];
 				$name=$_POST['name'];
-				$this->check = $this->social_service_model->register($name,$email,$password);
+				$this->check = $this->UsersModel->register($name,$email,$password);
 				if($this->check == "true")
 				{
 					$this->session->set_userdata('email', $email);
-					$this->info = $this->social_service_model->get_info($email);
+					$this->info = $this->UsersModel->getInfo($email);
 					$this->session->set_userdata('name', $this->info['name']);
 					$this->session->set_userdata('id', $this->info['id']);
-					$this->post_view();
+					$this->postView();
 				}
 				else{
 					$this->load->helper('form');
 					$this->data['note'] = "email is used before";
-					$this->load->view('register_view',$this->data);
+					$this->load->view('users/register_view',$this->data);
 				}
 		    }
 			else{
 				$this->load->helper('form');
-				$this->load->view('register_view'); 
+				$this->load->view('users/register_view'); 
 			}
 		}
 	
-		public function delete_post()
+		public function deletePost()
 		{
 			if(isset($_SESSION['email'])){
 				$post_id = $this->uri->segment(3);
 				$user_id = $this->uri->segment(4);
 				if($user_id == $this->session->id)
 				{
-					$this->social_service_model->delete_post($post_id);
-					$this->post_view();
+					$this->PostsModel->deletePost($post_id);
+					$this->postView();
 				}
 				else
 				{
-					$this->post_view();
+					$this->postView();
 				}
 			}
 			else
 			{
-				$this->post_view();
+				$this->postView();
 			}
 		}
 		
-		public function delete_comment()
+		public function deleteComment()
 		{
 			if(isset($_SESSION['email'])){
 				$comment_id = $this->uri->segment(3);
 				$user_id = $this->uri->segment(4);
 				if($user_id == $this->session->id)
 				{
-					$this->social_service_model->delete_comment($comment_id);
-					$this->post_view();
+					$this->CommentsModel->deleteComment($comment_id);
+					$this->postView();
 				}
 				else
 				{
-					$this->post_view();
+					$this->postView();
 				}
 			}
 			else
 			{
-				$this->post_view();
+				$this->postView();
 			}
 		}
 		
@@ -196,18 +198,23 @@
 					$post_id = $this->uri->segment(3);
 					$comment = $_POST['comment'];
 					$user_id = $this->session->id;
-					$this->social_service_model->add_comment($post_id,$comment,$user_id);
-					$this->post_view();
+					$this->CommentsModel->addComment($post_id,$comment,$user_id);
+					$this->postView();
 				}
 				else
 				{
-					$this->post_view();
+					$this->postView();
 				}
 			}
 			else
 			{
-				$this->post_view();
+				$this->postView();
 			}
+			
+		}
+	
+		public function upload()
+		{
 			
 		}
 	}
