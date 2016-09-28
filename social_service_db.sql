@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2016 at 04:52 PM
+-- Generation Time: Sep 28, 2016 at 09:48 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `user_id` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `posts`
@@ -95,7 +95,9 @@ INSERT INTO `posts` (`id`, `post`, `check_image`, `image`, `user_id`, `time`) VA
 (8, 'ff', 0, '', 1, '2016-09-27 12:02:01'),
 (9, '123', 0, '', 1, '2016-09-27 13:53:03'),
 (10, '111', 0, '', 2, '2016-09-27 13:56:28'),
-(11, '444', 0, '', 1, '2016-09-27 14:44:19');
+(11, '444', 0, '', 1, '2016-09-27 14:44:19'),
+(13, 'n', 0, '', 1, '2016-09-28 06:57:41'),
+(14, 'q', 0, '', 1, '2016-09-28 07:08:49');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
