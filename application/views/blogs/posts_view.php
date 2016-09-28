@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="http://[::1]/test-ITG/CodeIgniter/Social-service-task/css/posts.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/posts.css">
 
 	</head>
 	<body>
@@ -86,7 +86,7 @@
 					}
 					else{
 						?><center>
-							<img border="0" src="http://localhost/test-ITG/CodeIgniter/Social-service-task/uploads/images/
+							<img border="0" src="<?php echo base_url();?>uploads/images/
 							<?php echo $data_item['image'];?>" 
 							style="width: 400px;height: 300px;margin-bottom: 10px;">
 						</center>

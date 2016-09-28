@@ -35,8 +35,19 @@
 	
 		public function deletePost($post_id)
 		{
+			//check if the post image or not
+			$this->db->select('check_image,image'); 
+			$this->db->from('posts');
+			$this->db->where('id',$post_id);
+			$query=$this->db->get();
+			$query = $query->row_array();
+			if($query['check_image'] == 1)
+			{
+				unlink("uploads/images/".$query['image']);
+			}
 			$this->db->where('id', $post_id);
 			$this->db->delete('posts');
+			
 			$this->db->where('post_id', $post_id);
 			$this->db->delete('comments');			
 		}

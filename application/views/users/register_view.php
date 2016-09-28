@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="http://[::1]/test-ITG/CodeIgniter/Social-service-task/css/register.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/register.css">
 
 	</head>
 	<body>

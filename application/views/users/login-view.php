@@ -2,7 +2,7 @@
 	<head>
 		<title></title>
 		<?php $this->load->helper('url'); ?>
-		<link rel="stylesheet" type="text/css" href="http://[::1]/test-ITG/CodeIgniter/Social-service-task/css/login.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/login.css">
 	</head>
 	<body>
 		<div>

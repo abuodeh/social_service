@@ -142,7 +142,6 @@
                 $this->upload->initialize($config);
 				
 				if($this->upload->do_upload('image')){
-					echo "success";
                     $uploadData = $this->upload->data();
                     $picture = $uploadData['file_name'];
 					 $insertUserData = $this->PostsModel->insert_image($picture);
