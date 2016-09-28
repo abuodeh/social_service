@@ -16,6 +16,10 @@
 			$this->load->helper('url');
         }
 
+		/*
+		    check the session if it exist to view the post page otherwise the login page
+			@author Soad Abuodeh
+		*/
 		public function index()
 		{
 			if(isset($_SESSION['email'])){
@@ -27,6 +31,10 @@
 
 		}
 		
+		/*
+		    check the session if it exist to view the post page with posts and comment otherwise the login page
+			@author Soad Abuodeh
+		*/
 		public function postView()
 		{
 			if(isset($_SESSION['email'])){
@@ -39,6 +47,11 @@
 			}
 		}
 		
+		/*
+		    get email and password from user and check it if it true set the sessions and view the post page
+			else view again the login page
+			@author Soad Abuodeh
+		*/
 		public function login()
 		{
 			$this->form_validation->set_rules('email', 'Email', 'required');
@@ -78,6 +91,10 @@
 			
 		}
 		
+		/*
+		    unset the sessions and view the login page
+			@author Soad Abuodeh
+		*/
 		public function logOut()
 		{
 			unset(
@@ -88,6 +105,10 @@
 			$this->load->view('users/login-view');
 		}
 		
+		/*
+		    check the session if it exist to view the post page otherwise the register page
+			@author Soad Abuodeh
+		*/
 		public function registerView()
 		{	
 			if(isset($_SESSION['email'])){
@@ -99,6 +120,10 @@
 			
 		}
 		
+		/*
+		    get email,password and user name from user and insert it to DB 
+			@author Soad Abuodeh
+		*/
 		public function register()
 		{	
 		
@@ -131,9 +156,5 @@
 			}
 		}
 	
-		public function upload()
-		{
-			
-		}
 	}
 ?>

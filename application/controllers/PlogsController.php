@@ -16,6 +16,10 @@
 			$this->load->helper('url');
         }
 
+		/*
+		    check the session if it exist to view the post page otherwise the login page
+			@author Soad Abuodeh
+		*/
 		public function index()
 		{
 			if(isset($_SESSION['email'])){
@@ -27,6 +31,10 @@
 
 		}
 		
+		/*
+		    check the session if it exist to view the post page with posts and comment otherwise the login page
+			@author Soad Abuodeh
+		*/
 		public function postView()
 		{
 			if(isset($_SESSION['email'])){
@@ -39,6 +47,10 @@
 			}
 		}
 		
+		/*
+		    unset the sessions and view the login page
+			@author Soad Abuodeh
+		*/
 		public function logOut()
 		{
 			unset(
@@ -48,7 +60,11 @@
 			);
 			$this->load->view('users/login-view');
 		}
-			
+		
+		/*
+		    get post text and passing it to model 
+			@author Soad Abuodeh
+		*/		
 		public function post()
 		{
 			$this->form_validation->set_rules('post', 'Post', 'required');
@@ -63,6 +79,10 @@
 			}
 		}
 		
+		/*
+		    get id for the post that want to be deleted and passing it to model 
+			@author Soad Abuodeh
+		*/	
 		public function deletePost()
 		{
 			if(isset($_SESSION['email'])){
@@ -84,6 +104,10 @@
 			}
 		}
 		
+		/*
+		    get id for the comment that want to be deleted and passing it to model 
+			@author Soad Abuodeh
+		*/	
 		public function deleteComment()
 		{
 			if(isset($_SESSION['email'])){
@@ -105,6 +129,10 @@
 			}
 		}
 		
+		/*
+		    get comment text and passing it to model 
+			@author Soad Abuodeh
+		*/
 		public function comment()
 		{
 			
@@ -131,6 +159,10 @@
 			
 		}
 	
+	    /*
+		    get image that want to be upload and image name then passing it to model 
+			@author Soad Abuodeh
+		*/
 		public function upload_image()
 		{
 			if(!empty($_FILES['image']['name'])){
