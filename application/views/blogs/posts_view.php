@@ -42,7 +42,7 @@
 			echo form_open_multipart('PlogsController/upload_image');
 			?>
 				<label class="custom-file-upload">
-					<input type="file" name="image"/>
+					<input type="file" name="image" required/>
 					Choose Image ...
 				</label>
 				<input  class="submit" value="Upload Image" type="submit" >
