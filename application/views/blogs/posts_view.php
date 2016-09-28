@@ -39,7 +39,7 @@
 			<br>
 			<!--Upload button -->
 			<?php
-			echo form_open_multipart('PlogsController/upload');
+			echo form_open_multipart('PlogsController/upload_image');
 			?>
 				<label class="custom-file-upload">
 					<input type="file" name="image"/>
@@ -75,11 +75,25 @@
 						echo form_close();
 				}
 				?>
-				
+				<!--/delete button -->
+				<!--post data -->
 				<h5 class="text  time"><?php echo $data_item['time']?></h5>
 				<h2 class="text "><?php echo $data_item['name'] ?>:</h2>
-				<h4 class="text">"<?php echo $data_item['post'] ?>"</h4>
-				
+				<!--post text or image -->
+				<?php 
+					if($data_item['check_image'] == 0){
+						?><h4 class="text">"<?php echo $data_item['post'] ?>"</h4><?php
+					}
+					else{
+						?><center>
+							<img border="0" src="http://localhost/test-ITG/CodeIgniter/Social-service-task/uploads/images/
+							<?php echo $data_item['image'];?>" 
+							style="width: 400px;height: 300px;margin-bottom: 10px;">
+						</center>
+						<?php
+					}
+				?>
+				<!--/post data -->
 				<!--comments div -->
 				<div>
 					<?php
@@ -91,6 +105,7 @@
 						echo form_close();
 					?>
 				</div>
+				<!--/comments div -->
 				<!-- print comments to every post -->
 				
 					<?php foreach ($comments as $comment):
@@ -114,6 +129,7 @@
 										echo form_close();
 								}
 								?>
+								<!--/delete button -->
 							</div>
 							
 							<?php
@@ -124,6 +140,7 @@
 						}
 						endforeach;
 					?>
+					<!-- /print comments to every post -->
 			</div>
 			
 			<hr id="hr">

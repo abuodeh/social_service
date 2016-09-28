@@ -22,7 +22,7 @@
 	
 		public function getPosts()
 		{
-			$query = $this->db->query('SELECT posts.post,posts.id,posts.time,posts.user_id,'.
+			$query = $this->db->query('SELECT posts.post,posts.check_image,posts.image,posts.id,posts.time,posts.user_id,'.
 										$this->table_users.'.name
 										FROM posts
 										INNER JOIN '.$this->table_users.'
